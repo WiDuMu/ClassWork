@@ -1,0 +1,43 @@
+body {
+    background-color: #000000;
+    font-family: Roboto, 'Helvetica Neue';
+    color: #f40064;
+}
+#page-title {
+    color: purple;
+    font-weight: 600;
+}
+p {
+    color: #f40064;
+}
+h1 {
+    text-align: center;
+    font-size: 48px;
+    color: #b90089
+}
+.section-header {
+    font-style: oblique;
+    font-family: cursive;
+}
+#favorite-movie-title {
+    font-style: italic;
+    color: springgreen;
+}
+#most-favorite-food {
+    color: aqua;
+    font-weight: 600;
+}
+#favorite-music-name {
+    font-weight: 600;
+    color: crimson;
+}
+.favorite-image {
+    border-radius: 15px;
+
+}
+th {
+    color:blueviolet;
+}
+td {
+    color: lavender;
+}
