@@ -1,0 +1,21 @@
+ .jumbotron {
+     background-color: lightgray;
+ }
+header {
+    text-align: center;
+    background-color: lightgray;
+    font-family: 'Roboto Slab', serif;
+}
+.centered {
+    text-align: center;
+ }
+label {
+    font-family: 'Roboto Slab', serif;
+}
+.roboto-slab {
+    font-family: 'Roboto Slab', serif;
+}
+main {
+    background-color: gray;
+    /* I have no idea why the margins don't color*/
+}

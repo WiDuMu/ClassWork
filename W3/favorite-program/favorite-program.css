@@ -1,0 +1,11 @@
+.override, body {
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+h1 {
+    color: #8020e0;
+}
+h2 {
+    color: #8a2be2;
+}

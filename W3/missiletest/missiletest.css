@@ -1,0 +1,12 @@
+#alerts {
+    display: inline;
+}
+#warning {
+    background-color: #ff0000a3;
+}
+#tests {
+    background-color: #808080a3;
+}
+html {
+    text-align: center;
+}
