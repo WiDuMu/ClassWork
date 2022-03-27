@@ -15,6 +15,8 @@
     <header>
       <div class="flex">
         <p><a href="index.html">Back to index</a></p>
+        <p><a href="bridgechart.html">Chart</a></p>
+        <p onclick="console.log('clicked');drawMarkers('https://raw.githubusercontent.com/WiDuMu/ClassWork/main/W6/world-bridges.json')">US Bridges</p>
       </div>
       <div id="map"></div>
     </header>
@@ -23,9 +25,19 @@
   </body>
   <script>
     const map = L.map('map', {
-    center: [51.505, -0.09],
-    zoom: 13
+    center: [39.833333, -98.585522],
+    zoom: 4.5
   });
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+  let markers = L.layerGroup().addTo(map);
+  async function drawMarkers(url) {
+    console.log(markers);
+    bridgedata = await fetch(url);
+    bridges = await bridgedata.json();
+    bridges.forEach(bridge => {
+    L.marker(bridge['location']).addTo(markers);
+  });
+  }
+  drawMarkers('https://raw.githubusercontent.com/WiDuMu/ClassWork/main/W6/world-bridges.json');
   </script>
 </html>
