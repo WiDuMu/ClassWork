@@ -32,6 +32,8 @@
   let markers = L.layerGroup().addTo(map);
   async function drawMarkers(url) {
     markers.remove(map);
+    map.removeLayer(markers);
+    console.log(markers);
     markers = L.layerGroup().addTo(map);
     bridgedata = await fetch(url);
     bridges = await bridgedata.json();
