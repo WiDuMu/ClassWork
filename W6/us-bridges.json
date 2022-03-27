@@ -1,0 +1,36 @@
+[{
+    "name": "Verrazano-Narrows Bridge",
+    "city": "New York, NY",
+    "span_text": "1298.4m",
+    "span": 1298.4,
+    "location": [40.6066, -74.0447]    
+ },
+ {
+    "name": "Golden Gate Bridge",
+    "city": "San Francisco and Marin, CA",
+    "span_text": "1280.2m",
+    "span": 1280.2,
+    "location": [37.8199, -122.4783]    
+ },
+ {
+    "name": "Mackinac Bridge",
+    "city": "Mackinaw and St Ignace, MI",
+    "span_text": "1158.0m",
+    "span": 1158.0,
+    "location": [45.8174, -84.7278]    
+ },
+ {
+    "name": "George Washington Bridge",
+    "city": "New York, NY and New Jersey, NJ",
+    "span_text": "1067.0m",
+    "span": 1280.2,
+    "location": [40.8517, -73.9527]    
+ },
+ {
+    "name": "Tacoma Narrows Bridge",
+    "city": "Tacoma and Kitsap, WA",
+    "span_text": "853.44m",
+    "span": 853.44,
+    "location": [47.2690, -122.5517]    
+ }
+]
