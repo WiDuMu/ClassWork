@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+    <link href="styles.css" type="text/css" rel="stylesheet">
+    <title></title>
+  </head>
+  <body>
+    <header>
+      <div class="flex">
+        <p id="updateTime">Time: </p>
+        <p id="lat">Latitude: </p>
+        <p id="long">Longitude: </p>
+      </div>
+      <div id="map"></div>
+    </header>
+    <main></main>
+    <footer></footer>
+  </body>
+  <script>
+  let attempts = 0
+  let map = L.map('map', { // Creating map
+    center: [0, 0],
+    zoom: 2
+  });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+  const marker = L.marker([0,0], /*{icon: bridgeIcon}*/).addTo(map);
+  function drawISS(failedAttempts) { //update
+    if (failedAttempts == 3) {return}// Checking attampts
+    const time = document.getElementById('updateTime'); //getting elements to update
+    const latitude = document.getElementById('lat');
+    const longitude = document.getElementById('long');
+    fetch('https://api.wheretheiss.at/v1/satellites/25544') //fetch
+      .then(data => data.json())
+      .then(ISS => {
+        time.innerHTML = `Time: ${new Date(ISS['timestamp']*1000).toTimeString()}`; // Updating the top stuff
+        latitude.innerHTML = `Latitude: ${ISS['latitude']}`;
+        longitude.innerHTML = `Lonitude: ${ISS['longitude']}`;
+        marker.setLatLng([ISS['latitude'],ISS['longitude']]); // update marker
+        marker.bindPopup(`ISS Lat: ${ISS['latitude']} Long: ${ISS['longitude']}`);
+      })
+      .catch(err => {
+        failedAttempts++;
+        console.log(err);  
+      })
+      .finally( () => {
+        setTimeout(drawISS, 10000, failedAttempts);
+      })
+  }
+  drawISS(attempts);
+  </script>
+</html>

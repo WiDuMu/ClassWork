@@ -25,17 +25,23 @@
     <footer></footer>
   </body>
   <script>
-  let map = L.map('map', {
+  let map = L.map('map', { // Creating map
     center: [20, 0],
     zoom: 3
   });
+  const bridgeIcon = L.icon({ //Boilerplate for icon
+    iconUrl: 'bridge.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, 0],
+});
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
-  let markers = L.layerGroup().addTo(map);
-  async function drawMarkers(url) {
+  async function drawMarkers(url) { //wrapper because firefox
     bridgedata = await fetch(url);
     bridges = await bridgedata.json();
-    bridges.forEach(bridge => {
-    L.marker(bridge['location']).addTo(markers);
+    bridges.forEach(bridge => { //placing markers
+    const marker = L.marker(bridge['location'], {icon: bridgeIcon}).addTo(map);
+    marker.bindPopup(`<b>${bridge['name']}</b> <i>${bridge['span_text']}</i>`)
   });
   }
   drawMarkers('https://raw.githubusercontent.com/WiDuMu/ClassWork/main/W6/world-bridges.json');

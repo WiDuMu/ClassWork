@@ -2,15 +2,59 @@
 <html lang="">
   <head>
     <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="styles.css" type="text/css" rel="stylesheet">
     <title></title>
   </head>
   <body>
     <header>
-      <div class="">
+      <div class="flex">
+        <p><a href="index.html">Back to index</a></p>
+        <p><a href="usbridgemap.html">US Bridges Map</a></p>
+        <p><a href="worldbridgemap.html">World Bridges Map</a></p>
+        <p onclick="drawchart('https://raw.githubusercontent.com/WiDuMu/ClassWork/main/W6/us-bridges.json')"><a href="#">US Bridges Chart</a></p>
+        <p onclick="drawchart('https://raw.githubusercontent.com/WiDuMu/ClassWork/main/W6/world-bridges.json')"><a href="#">World Bridges Chart</a></p>
       </div>
     </header>
-    <main></main>
+    <main>
+      <div id="chart">
+      </div>
+    </main>
     <footer></footer>
   </body>
+  <script>
+    async function drawchart(url) {
+      chartDiv = document.getElementById('chart');
+      canvas = document.createElement('canvas'); 
+      chartDiv.replaceChildren(canvas); //Destroys any charts that already exist.
+      context = canvas.getContext('2d');
+      const bridgesRaw = await fetch(url); //getting data
+      const bridgesJSON = await bridgesRaw.json();
+      const bridgeNames = bridgesJSON.map(bridge => bridge['name']); //putting the data into the right format.
+      const bridgeSpans = bridgesJSON.map(bridge => bridge['span']);
+      const bridgeColors = bridgesJSON.map(bridge => `#${Math.floor(bridge['span']/ 8 ).toString(16)}0000`); //fancy colors
+      const bridges = { // Chart boilerplate
+        type: 'bar',
+        data: {
+          labels: bridgeNames,
+          datasets: [{
+            label:'Longest bridges',
+            data: bridgeSpans,
+            backgroundColor: bridgeColors
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          }
+        }
+      }
+    chart = await new Chart(canvas, bridges);
+    }
+    drawchart('https://raw.githubusercontent.com/WiDuMu/ClassWork/main/W6/world-bridges.json') //initial state.
+  </script>
 </html>
