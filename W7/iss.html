@@ -29,8 +29,14 @@
     center: [0, 0],
     zoom: 2
   });
+  const Icon = L.icon({ //Boilerplate for icon
+    iconUrl: 'iss-by-Viktor-Korobkov.png',
+    iconSize: [64, 64],
+    iconAnchor: [32, 32],
+    popupAnchor: [0, 0],
+});
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar', attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
-  const marker = L.marker([0,0], /*{icon: bridgeIcon}*/).addTo(map);
+  const marker = L.marker([0,0], {icon: Icon}).addTo(map);
   function drawISS(failedAttempts) { //update
     if (failedAttempts == 3) {return}// Checking attampts
     const time = document.getElementById('updateTime'); //getting elements to update
